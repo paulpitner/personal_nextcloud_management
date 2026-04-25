@@ -39,7 +39,7 @@ ${OCC_CMD} maintenance:mode --on
 # --- rsync files -------------------------------------------------------------
 log "Syncing Nextcloud files to ${BACKUP_DIR} ..."
 mkdir -p "${BACKUP_DIR}"
-sudo rsync -Aavx --delete "${NEXTCLOUD_DIR}" "${BACKUP_DIR}/"
+sudo rsync -Aavx --delete --progress "${NEXTCLOUD_DIR}" "${BACKUP_DIR}"
 log "File sync complete."
 
 # --- MySQL/MariaDB dump ------------------------------------------------------
@@ -53,7 +53,7 @@ log "Database dump complete."
 
 # --- Move .bak to backup root ------------------------------------------------
 log "Moving SQL backup to ${BACKUP_DIR}/ ..."
-mv "${SQL_BACKUP_FILE}" "${BACKUP_DIR}/"
+sudo mv "${SQL_BACKUP_FILE}" "${BACKUP_DIR}/"
 
 # --- Update this script's date log -------------------------------------------
 SCRIPT_PATH="$(realpath "$0")"
@@ -73,4 +73,6 @@ log "Backup finished successfully. Files at: ${BACKUP_DIR}"
 # 2026-01-07
 # 2026-02-09
 # 2026-03-24
+# 2026-04-25
+# 2026-04-25
 # END_BACKUP_LOG
